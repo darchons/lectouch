@@ -25,7 +25,6 @@
     <ClCompile Include="driver.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="hid.c" />
     <ClCompile Include="driver.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -35,6 +34,9 @@
     </ClCompile>
     <ClCompile Include="hid.c" />
     <ClCompile Include="hid.c" />
+    <ClCompile Include="hid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="hid.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -56,7 +58,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Inf Include="nvshldctrl.inx">
+    <Inf Include="lectouch.inx">
       <Filter>Driver Files</Filter>
     </Inf>
   </ItemGroup>

@@ -8,8 +8,8 @@
 .Set CompressionType=MSZIP
 .Set Cabinet=on
 .Set Compress=on
-; nvshldctrl
-.Set DestinationDir=nvshldctrl
-nvshldctrl.sys
-nvshldctrl.inf
+; lectouch
+.Set DestinationDir=lectouch
+lectouch.sys
+lectouch.inf
 WdfCoinstaller01009.dll

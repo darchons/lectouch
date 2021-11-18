@@ -26,7 +26,7 @@ Revision History:
 
 --*/
 
-#include <hidusbfx2.h>
+#include "hidusbfx2.h"
 
 #ifdef ALLOC_PRAGMA
     #pragma alloc_text( INIT, DriverEntry )
@@ -156,22 +156,8 @@ Return Value:
     //  once we're done with them
     devContext->TargetToSendRequestsTo = WdfDeviceGetIoTarget(hDevice);
 
-    // Init rumble values
-    devContext->isRumbling = FALSE;
-    devContext->isZeroRumble = FALSE;
-    devContext->leftRumbleStrength = 0;
-    devContext->rightRumbleStrength = 0;
-    devContext->rumbleGain = 255;
-    devContext->actuatorSel = 1;
-
-    // Init trackpad values
-    devContext->origX = 0;
-    devContext->origY = 0;
-    devContext->isTrackpadPressed = FALSE;
-    devContext->firstTrackpadPress.QuadPart = 0;
-
-    // Init consumer control
-    devContext->lastCCState = 0;
+    devContext->LastX = 0;
+    devContext->LastY = 0;
     
     WDF_IO_QUEUE_CONFIG_INIT_DEFAULT_QUEUE(&queueConfig, WdfIoQueueDispatchParallel);
     queueConfig.EvtIoInternalDeviceControl = HidFx2EvtInternalDeviceControl;

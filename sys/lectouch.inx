@@ -4,11 +4,11 @@ Class       = HIDClass
 ClassGuid   = {745a17a0-74d3-11d0-b6fe-00a0c90f57da}
 Provider    = %ProviderName%
 DriverVer   = ; Set on build
-CatalogFile = nvshldctrl.cat
+CatalogFile = lectouch.cat
 
 
 [SourceDisksFiles]
-nvshldctrl.sys = 99
+lectouch.sys = 99
 WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=99
 
 [SourceDisksNames]
@@ -16,7 +16,7 @@ WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=99
 
 [DestinationDirs]
 CopyFilterDriver = 12
-nvshldctrl.Inst_CoInstaller_CopyFiles = 11
+lectouch.Inst_CoInstaller_CopyFiles = 11
 
 [Manufacturer]
 %ManufacturerName%  = Standard,NT$ARCH$
@@ -24,82 +24,82 @@ nvshldctrl.Inst_CoInstaller_CopyFiles = 11
 
 ; For XP and later
 [Standard.NT$ARCH$]
-%nvshldctrl%         = nvshldctrl.Inst, USB\VID_0955&PID_7210
+%lectouch%         = lectouch.Inst, USB\VID_05FF&PID_001A
 
 ; For Win7 and later
 [Standard.NT$ARCH$.6.1]
-%nvshldctrl%         = nvshldctrl.Inst.Win7, USB\VID_0955&PID_7210
+%lectouch%         = lectouch.Inst.Win7, USB\VID_05FF&PID_001A
 
 ;===============================================================
 ;   Install section for XP thru Vista
 ;===============================================================
-[nvshldctrl.Inst.NT]
+[lectouch.Inst.NT]
 CopyFiles = CopyFilterDriver
 
-[nvshldctrl.Inst.NT.HW]
-AddReg = nvshldctrl_Parameters.AddReg 
+[lectouch.Inst.NT.HW]
+AddReg = lectouch_Parameters.AddReg 
 
-[nvshldctrl.Inst.NT.Services]
-AddService = nvshldctrl,, nvshldctrl_Service_Inst,
+[lectouch.Inst.NT.Services]
+AddService = lectouch,, lectouch_Service_Inst,
 AddService = HidUsb, 0x000001fa, HidUsb_AddService  ; flag 0x2 sets this as the service for the device
 
-[nvshldctrl_Parameters.AddReg]
-HKR,,"LowerFilters",0x00010008,"nvshldctrl"
+[lectouch_Parameters.AddReg]
+HKR,,"LowerFilters",0x00010008,"lectouch"
 
 ;===============================================================
 ;   Install section for Win7 and later
 ;===============================================================
-[nvshldctrl.Inst.Win7.NT]
+[lectouch.Inst.Win7.NT]
 CopyFiles = CopyFilterDriver
 
-[nvshldctrl.Inst.Win7.NT.HW]
-AddReg = nvshldctrl_Win7_Parameters.AddReg 
+[lectouch.Inst.Win7.NT.HW]
+AddReg = lectouch_Win7_Parameters.AddReg 
 
-[nvshldctrl.Inst.Win7.NT.Services]
-AddService = nvshldctrl,, nvshldctrl_Service_Inst,
+[lectouch.Inst.Win7.NT.Services]
+AddService = lectouch,, lectouch_Service_Inst,
 AddService = HidUsb, 0x000001fa, HidUsb_AddService  ; flag 0x2 sets this as the service for the device
 
-[nvshldctrl_Win7_Parameters.AddReg]
-HKR,,"LowerFilters",0x00010008,"nvshldctrl"
+[lectouch_Win7_Parameters.AddReg]
+HKR,,"LowerFilters",0x00010008,"lectouch"
 
 [CopyFilterDriver]
-nvshldctrl.sys
+lectouch.sys
 
 [HidUsb_AddService]
-ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
-StartType      = 3                  ; SERVICE_DEMAND_START
-ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceType    = %SERVICE_KERNEL_DRIVER%
+StartType      = %SERVICE_DEMAND_START%
+ErrorControl   = %SERVICE_ERROR_NORMAL%
 ServiceBinary  = %12%\HidUsb.sys
 
 ;===============================================================
 ;   Service section (common to all OS versions)
 ;===============================================================
 
-[nvshldctrl_Service_Inst]
-DisplayName    = %nvshldctrl%
+[lectouch_Service_Inst]
+DisplayName    = %lectouch%
 ServiceType    = %SERVICE_KERNEL_DRIVER% 
 StartType      = %SERVICE_DEMAND_START% 
 ErrorControl   = %SERVICE_ERROR_IGNORE% 
-ServiceBinary  = %12%\nvshldctrl.sys 
+ServiceBinary  = %12%\lectouch.sys 
 
 ;================================================================
 ; WDF Coinstaller installation
 ;===============================================================
 
-[nvshldctrl.Inst.NT.CoInstallers]
-AddReg=nvshldctrl.Inst_CoInstaller_AddReg
-CopyFiles=nvshldctrl.Inst_CoInstaller_CopyFiles
+[lectouch.Inst.NT.CoInstallers]
+AddReg=lectouch.Inst_CoInstaller_AddReg
+CopyFiles=lectouch.Inst_CoInstaller_CopyFiles
 
-[nvshldctrl.Inst_CoInstaller_AddReg]
+[lectouch.Inst_CoInstaller_AddReg]
 HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
 
-[nvshldctrl.Inst_CoInstaller_CopyFiles]
+[lectouch.Inst_CoInstaller_CopyFiles]
 WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,,,0x00000010    ;COPYFLG_NO_OVERWRITE (for win2k)
 
-[nvshldctrl.Inst.NT.Wdf]
-KmdfService = nvshldctrl, nvshldctrl_wdfsect
+[lectouch.Inst.NT.Wdf]
+KmdfService = lectouch, lectouch_wdfsect
 
-[nvshldctrl_wdfsect]
+[lectouch_wdfsect]
 KmdfLibraryVersion = $KMDFVERSION$
 
 
@@ -109,10 +109,10 @@ KmdfLibraryVersion = $KMDFVERSION$
 
 [Strings] 
 ;Localizable
-ProviderName        = "Nefarius Software Solutions"
-ManufacturerName    = "NVIDIA"
-nvshldctrl          = "NVIDIA Shield Controller" 
-DISK_NAME           = "NVIDIA Shield Controller Device Install Disk"
+ProviderName        = "Darchons"
+ManufacturerName    = "LeCroy"
+lectouch            = "LeCroy Front Panel" 
+DISK_NAME           = "LeCroy Front Panel Device Install Disk"
 
 ;Non-Localizable
 SERVICE_BOOT_START     = 0x0 

@@ -64,27 +64,10 @@ typedef struct _DEVICE_EXTENSION{
     WDFUSBDEVICE      UsbDevice;
 
     WDFIOTARGET TargetToSendRequestsTo; 
-    
-    // Rumble state
-    int isRumbling;
-    int isZeroRumble;
 
-    unsigned short leftRumbleStrength;
-    unsigned short rightRumbleStrength;
-
-    unsigned short rumbleGain;
-
-    LONG actuatorSel; // 1 = left, 2 = right
-
-    // Trackpad state
-    UCHAR origX;
-    UCHAR origY;
-
-    int isTrackpadPressed;
-    LARGE_INTEGER firstTrackpadPress;
-
-    // Consumer control
-    UCHAR lastCCState;
+    LONG LastX;
+    LONG LastY;
+    BOOLEAN RecentChange;
 } DEVICE_EXTENSION, * PDEVICE_EXTENSION;
 
 WDF_DECLARE_CONTEXT_TYPE_WITH_NAME(DEVICE_EXTENSION, GetDeviceContext)
